@@ -4,7 +4,7 @@ using namespace std;
 
 
 int main() {
-   /* string username,password;
+    string username,password;
      cout<<"Username:"<<endl;
      cin>>username;
      cout<<"Password:"<<endl;
@@ -12,5 +12,5 @@ int main() {
      Login User(username, password);
      User.check();
      return 0;
-*/
+
 }
