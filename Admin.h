@@ -13,7 +13,7 @@ public:
     static void RemoveMember();
     static void AddBooks();
     static void ViewRequests();
-    void ViewRecords();
+    static void ViewRecords();
 };
 
 

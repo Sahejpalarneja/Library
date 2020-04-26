@@ -9,12 +9,12 @@
 
 class Member {
 public:
-    void GetDetails();
-    void Issue(std::string &username);
-    void Return();
-    void ChangePassword();
-    void Request(std::string name);
-    void Record(std::string username,std:: string name);
+    static void GetDetails();
+    static void Issue(std::string &username);
+    static void Return();
+    static void ChangePassword();
+    static void Request();
+    static void Record(const std::string& username,const std:: string& name);
 
 };
 
