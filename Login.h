@@ -14,11 +14,10 @@ class Login: public Admin, public Member {
     string username;
     string password;
 public:
-    Login(string username, string password);
     Login();
+    Login(string username, string password);
     static void adminpage();
-    static void memberpage();
+    static void memberpage(string username, string password);
     void check();
-};
-
+    };
 #endif //LIBRARY_LOGIN_H

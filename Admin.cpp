@@ -5,7 +5,6 @@
 #include<bits/stdc++.h>
 
 
-
 void Admin::AddMember()
 {
     string username,password;

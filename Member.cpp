@@ -4,28 +4,26 @@
 
 #include "Member.h"
 #include <iostream>
-#include <fstream>
+#include<bits/stdc++.h>
 #include <string>
-void Member::Record(string username, string name)
+using namespace std;
+void Member::Record( const string &username,  const string &name)
 {
     fstream fhandle("Records.txt",ios::out|ios::app);
-    file<<username<<' '<<name<<endl;
+    fhandle<<username<<' '<<name<<endl;
 }
 
-void Member::Request(string name = '0')
+void Member::Request()
 {
-    string author,temp,atemp;
+
+    string  name,author,temp,atemp;
     bool flag= false;
-    if(name == "0")
-    {
-        cout<<"Enter the name of the book"<<endl;
-        getline(cin,name);
-    }
+    cout<<"Enter the name of the book"<<endl;
+    getline(cin.ignore(),name);
     cout<<"Enter the name of the author"<<endl;
     getline(cin,author);
     transform(author.begin(), author.end(), author.begin(), ::toupper);
     transform(name.begin(), name.end(), name.begin(), ::toupper);
-
     ifstream fhandle("Requests.txt",ios::in);
     while(getline(fhandle,temp,':') && getline(fhandle,atemp))
     {
@@ -51,7 +49,7 @@ void Member::GetDetails()
     string name, temp, author, number;
     bool flag = false;
     cout << "Enter the name of the book" << endl;
-    getline(cin, name);
+    getline(cin.ignore(), name);
     transform(name.begin(), name.end(), name.begin(), ::toupper);
     fstream fhandle("Books.txt", ios::in);
     while (getline(fhandle, temp, ':') && getline(fhandle, author, ':') && getline(fhandle, number)) {
@@ -75,7 +73,7 @@ void Member::GetDetails()
         cout << "Press any other button to go back to the MENU" << endl;
         cin >> ch;
         if (ch == 'Y' || ch == 'y') {
-            Request(name);
+            Request();
         }
     }
 }
@@ -85,9 +83,9 @@ void Member::ChangePassword()
     bool flag = true;
     string User, pass, newpass;
     cout << "Enter your Username" << endl;
-    getline (cin, User);
+    getline (cin.ignore(), User);
     cout << "Enter your current password" << endl;
-    getline (cin, pass);
+    getline (cin.ignore(), pass);
     cout << "Enter New Password" << endl;
     getline (cin, newpass);
     fstream fhandle ("Login.txt", ios::in);
@@ -97,6 +95,7 @@ void Member::ChangePassword()
         if (User == temp) {
 
             file << User << ' ' << newpass << endl;
+            cout<<"Password has been updated"<<endl;
             flag = false;
         }
     }
@@ -106,7 +105,6 @@ void Member::ChangePassword()
     fhandle.close ();
     fstream fin ("Login.txt", ios::in);
     while (getline (fin, temp, ' ') && getline (fin, temp2)) {
-        cout << "Open" << endl;
         if (User == temp) {
             continue;
         }
@@ -118,7 +116,7 @@ void Member::ChangePassword()
     rename ("temp.txt", "Login.txt");
 }
 
-void Member::Issue(string username)
+void Member::Issue(string &username)
 {
     string name, author, number;
     int count = 1;
@@ -136,7 +134,7 @@ void Member::Issue(string username)
     fhandle.close();
     string temp;
     cout << "Enter the name of the book You want to borrow" << endl;
-    getline(cin,name);
+    getline(cin.ignore(),name);
     transform(name.begin(), name.end(), name.begin(), ::toupper);
     fstream fin("Books.txt", ios::in);
     while (getline(fin, temp, ':') && getline(fin, author, ':') && getline(fin, number)) {
@@ -173,6 +171,54 @@ void Member::Issue(string username)
 
 void Member::Return()
 {
+    string name,author,temp,number;
+    cout<<"Enter the name of the book you want to return"<<endl;
+    getline(cin.ignore(),name);
+    transform(name.begin(), name.end(), name.begin(), ::toupper);
+    fstream fhandle("Books.txt", ios::in);
+    bool flag = true;
+    while (getline(fhandle, temp, ':') && getline(fhandle, author, ':') && getline(fhandle, number))
+    {
+
+        ofstream file("temp.txt", ios::out | ios::app);
+        int num = stoi(number);
+        if (name == temp)
+        {
+            num = num + 1;
+            file << temp << ':' << author << ':' << num << endl;
+            flag = false;
+            cout<<"The book has been returned successfully"<<endl;
+        }
+        file.close();
+
+    }
+    fhandle.close();
+    ofstream file("temp.txt", ios::out | ios::app);
+    if (flag)
+    {
+        string author1;
+        cout << "Enter the name of the author" << endl;
+        getline(cin,author1);
+        transform(author1.begin(), author1.end(), author1.begin(), ::toupper);
+        cout<<"The book has been returned successfully"<<endl;
+        file << name << ':' << author1 << ':' << '1' << endl;
+    }
+    fstream fin("Books.txt", ios::in);
+    while (getline(fin, temp, ':') && getline(fin, author, ':') && getline(fin, number))
+    {
+
+        if (name == temp)
+        {
+            continue;
+        }
+        file << temp << ':' << author << ':' << number << endl;
+    }
+    fin.close();
+    file.close();
+    remove("Books.txt");
+    rename("temp.txt","Books.txt");
+
 
 
 }
+
