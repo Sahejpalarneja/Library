@@ -4,16 +4,24 @@
 
 #ifndef LIBRARY_ADMIN_H
 #define LIBRARY_ADMIN_H
+
+
 #include <string>
 #include <iostream>
+#include"User.h"
 
-class Admin {
-public:
-    static void AddMember();
-    static void RemoveMember();
-    static void AddBooks();
-    static void ViewRequests();
-    static void ViewRecords();
+
+//inherits from user class
+class Admin:public User
+{
+    public:
+
+        void AddMember();
+        void RemoveMember();
+        void memberlist();
+        void AddBooks();
+        void ViewRequests();
+        void ViewRecords();
 };
 
 

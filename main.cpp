@@ -1,17 +1,15 @@
+#include "User.h"
 
-#include "Login.cpp"
 using namespace std;
 
-
-int main() {
-     string username,password;
-     cout<<"Username:"<<endl;
-     cin>>username;
-     cout<<"Password:"<<endl;
-     cin>>password;
-     Login User(username, password);
-     User.check();
-     return 0;
-
-
+int main()
+{
+    string password,name;
+    cout << "Username:" << endl;
+    cin >> name;
+    cout << "Password:" << endl;
+    cin >> password;
+    User user(name, password);//Creates a user with name and password
+    user.check();//checks for the username and password inside Login file
+    return 0;
 }

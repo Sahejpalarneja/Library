@@ -6,16 +6,26 @@
 #define LIBRARY_MEMBER_H
 
 
+#include<string>
+#include "User.h"
 
-class Member {
+
+//inherits form User class
+class Member:public User
+{
+private:
+    string username;
+    string password;
 public:
-    static void GetDetails();
-    static void Issue(std::string &username);
-    static void Return();
-    static void ChangePassword();
-    static void Request();
-    static void Record(const std::string& username,const std:: string& name);
-
+        Member(string username,string password);
+        void GetDetails();
+        void Issue(std::string &username);
+        void Return();
+        void ChangePassword();
+        void LibraryCard(std::string username);
+        void Request();
+        void DateExtend(std::string username);
+        void Record(const std::string& username,const std:: string& name,int day, int month);
 };
 
 
